@@ -29,7 +29,7 @@ python-dateutil==2.8.2
 python-dotenv==1.0.0
 pytz==2023.3.post1
 PyYAML==6.0.1
-requests==2.31.0
+requests==2.32.2
 s3transfer==0.5.2
 shortuuid==1.0.11
 six==1.16.0
