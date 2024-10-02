@@ -17,7 +17,7 @@ djangorestframework-simplejwt==5.2.2
 drf-yasg==1.21.7
 environs==10.0.0
 gunicorn==22.0.0
-idna==3.6
+idna==3.7
 inflection==0.5.1
 jmespath==0.10.0
 marshmallow==3.20.1
