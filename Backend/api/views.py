@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import random
 
 from api import serializer as api_serializer
 from userauths.models import User, Profile
@@ -16,7 +17,7 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [AllowAny]
     serializer_class = api_serializer.RegisterSerializer
 
-def generate_randon_otp(length=8):
+def generate_random_otp(length=8):
     otp = ''.join([str(random.randint(0,9)) for _ in range(length)])
     return otp
 
