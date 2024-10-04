@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from datetime import datetime, timedelta
+from environs import Env
+env = Env()
+env.read_env()
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +56,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'anymail',
 ]
 
 MIDDLEWARE = [
@@ -138,6 +144,18 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'userauths.User'
+
+MAILGUN_API_KEY = env('MAILGUN_API_KEY')
+# MAILGUN_API_TOKEN = env('MAILERSEND_API_TOKEN')
+MAILGUN_SENDER_DOMAIN = env('MAILGUN_SENDER_DOMAIN')
+
+ANY_EMAIL= {
+    "MAILGUN_API_KEY" : env("MAILGUN_API_KEY"),
+    "MAILGUN_SENDER_DOMAIN" : env("MAILGUN_SENDER_DOMAIN"),
+}
+
+FROM_EMAIL = env("FROM_EMAIL")
+EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
