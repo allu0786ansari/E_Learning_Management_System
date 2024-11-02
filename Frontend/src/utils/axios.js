@@ -1,7 +1,7 @@
 import axios from 'axios'
-
+import {API_BASE_URL } from "./constants";
 const apiInstance = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/v1', // Replace with your API endpoint
+    baseURL: API_BASE_URL, // Replace with your API endpoint
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
