@@ -1,4 +1,4 @@
-import {useAuthStore} from "../store/ath";
+import {useAuthStore} from "../store/auth";
 import axios from "./axios";
 import jwt_decode from "jwt-decode";
 import Cookie from "js-cookie";
@@ -58,7 +58,7 @@ export const setUser = async () => {
     const refresh_token = Cookie.get("refresh_token");
 
     if ( !access_token || !refresh_token ) {
-        alert("Toekn does not exists");
+      //  alert("Toekn does not exists");
         return;
     }
     if ( isAccessTokenExpired(access_token)) {
