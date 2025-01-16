@@ -16,20 +16,42 @@ function Register() {
 
   const navigate = useNavigate();
 
+  const validatePassword = (password) => {
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return false;
+    }
+    if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+      alert("Password must include both uppercase and lowercase letters.");
+      return false;
+    }
+    if (!/\d/.test(password)) {
+      alert("Password must include at least one number.");
+      return false;
+    }
+    if (!/[!@#$%^&*]/.test(password)) {
+      alert("Password must include at least one special character.");
+      return false;
+    }
+    return true;
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validatePassword(password)) return;
+  
     setIsLoading(true);
-
     const { error } = await register(fullName, email, password, password2);
     if (error) {
       alert(error);
       setIsLoading(false);
     } else {
       navigate("/");
-      alert("Registration Successfull, you have now been logged in");
+      alert("Registration Successful, you have now been logged in");
       setIsLoading(false);
     }
   };
+  
 
   return (
     <>

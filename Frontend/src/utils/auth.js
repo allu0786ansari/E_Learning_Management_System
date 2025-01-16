@@ -17,9 +17,12 @@ export const login = async (email, password) => {
 
     return { data, error: null };
   } catch (error) {
+    console.error("Login error:", error);
+    const errorMessage = error.response?.data?.detail || error.message || "Something went wrong";
+
     return {
       data: null,
-      error: error.response.data?.detail || "Something went wrong",
+      error: errorMessage,
     };
   }
 };
@@ -27,6 +30,7 @@ export const login = async (email, password) => {
 export const register = async (full_name, email, password, password2) => {
   try {
     const { data } = await axios.post(`user/register/`, {
+      username: full_name, // Map full_name to username
       full_name,
       email,
       password,
@@ -36,16 +40,21 @@ export const register = async (full_name, email, password, password2) => {
     await login(email, password);
     return { data, error: null };
   } catch (error) {
+    console.error("Register error:", error.response?.data || error.message);
+    const usernameError = error.response?.data?.username || "Username error not provided";
     const fullNameError = error.response?.data?.full_name || "Full name error not provided";
     const emailError = error.response?.data?.email || "Email error not provided";
+    const passwordError = error.response?.data?.password || "Password error not provided";
     const generalError = error.response?.data?.detail || "An unexpected error occurred";
 
     return {
       data: null,
-      error: `${fullNameError} - ${emailError} || ${generalError}`,
+      error: `${usernameError} - ${fullNameError} - ${emailError} - ${passwordError} || ${generalError}`,
     };
   }
 };
+
+
 
 
 export const logout = () => {
